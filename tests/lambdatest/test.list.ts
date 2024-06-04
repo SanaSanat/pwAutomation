@@ -1,3 +1,3 @@
-import './asserytion.spec'
-import './dragAndDrop.spec'
-import './datePicker.spec'
+import "./assertion.spec";
+import "./dragAndDrop.spec";
+import "./datePicker.spec";
