@@ -19,7 +19,7 @@ jobs:
             - name: Install Playwright
               run: npx playwright install --with-deps        
             - name: Install Allure reports
-              run: 
+              run: |
                 npm install -D allure-commandline --force  
                 npx allure generate ./allure-results --clean
             - name: Run Playwright test
