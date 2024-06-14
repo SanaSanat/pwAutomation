@@ -9,7 +9,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "dropDown": "npx playwright test dropDown.spec.ts"
+    "dropDown": "npx playwright test dropDown.spec.ts",
+    "lambdaTest": "npx playwright test lambdatest"
   },
   "dependencies": {
     "-": "^0.0.1",
