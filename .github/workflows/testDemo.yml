@@ -41,7 +41,7 @@ jobs:
               with:
                 node-version: '14'
             - name: Install dependencies
-              run: npm ci --force   
+              run: npm i --force   
             - name: Install Playwright
               run: npx playwright install --with-dep
             - name: Wait for localhost
