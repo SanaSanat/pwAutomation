@@ -1,0 +1,66 @@
+name: Playwright tests
+
+on: 
+    pull_request: 
+        types: 
+            - opened
+            - closed
+        branches: 
+            - master
+            - develop
+            - feat/*
+            - bugfix/*
+            - hotfix/*
+            - release/*
+    workflow_dispatch:
+    push:
+        branches: 
+            - master
+            - develop
+            - feat/*
+            - bugfix/*
+            - hotfix/*
+            - release/*
+        paths-ignore:
+            - '**.md'
+            - '**.yml'
+            - '**.yaml'
+            - '**.json'
+            - '**.sh'
+    schedule:
+        - cron: '0 0 * * *'
+
+jobs: 
+    start_project:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Set up Node.js
+              uses: actions/setup-node@v2 
+              with:
+                node-version: '14'
+            - name: Install dependencies
+              run: npm ci --force   
+            - name: Install Playwright
+              run: npx playwright install --with-dep
+            - name: Wait for localhost
+              run: |
+                npm run stat
+                echo 'Waiting for localhost'   
+            - name: Run tests
+                 - 4200:4200 
+              run: npm run projectTest
+    building_project:
+        needs: start_project
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3  
+            - name: Install dependencies
+              run: npm ci --force   
+            - name: Install Playwright
+              run: npx playwright install --with-dep
+            - name: Run test
+              run: npm run lambdaTest      
+
