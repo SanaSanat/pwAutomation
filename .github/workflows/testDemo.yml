@@ -46,8 +46,11 @@ jobs:
               run: npx playwright install --with-dep
             - name: Wait for localhost
               run: |
-                npm run stat
-                echo 'Waiting for localhost'   
+                npm run start &
+                until $(curl --output /dev/null --silent --head --fail http://localhost:4200); do
+                echo "Waiting for localhost to be available..."
+                sleep 5
+                done   
             - name: Run tests
                  - 4200:4200 
               run: npm run projectTest
